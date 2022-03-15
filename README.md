@@ -13,3 +13,6 @@ pip install module-name
 
 # creator:
 leloup_alpha#4534 / spidirman
+
+# social media
+  <a href="https://youtube.com/c/leloupalpha">📺YouTube</a>
