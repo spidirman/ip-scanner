@@ -1,14 +1,14 @@
 # ip-info-scraper
 this is a little python script for scan ip and get informations about this
 
-### module needed:
+## module needed:
 
--aiohttp
--asyncio
--time
--os
+### -aiohttp
+### -asyncio
+### -time
+### -os
 
-# how to instal a python module: 
+# how to install a python module: 
 pip install module-name
 
 # creator:
