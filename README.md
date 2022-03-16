@@ -1,5 +1,5 @@
 # ip-info-scanner
-this is a little python script for scan ip and get informations about this
+this is a little python script for scan ip and get informations about it
 
 ## module needed:
 
@@ -9,7 +9,7 @@ this is a little python script for scan ip and get informations about this
 ### -os
 
 # how to install a python module: 
-pip install module-name
+pip install 'module-name'
 
 # creator:
 leloup_alpha#4534 / spidirman
