@@ -1,4 +1,4 @@
-# ip-info-scraper
+# ip-info-scanner
 this is a little python script for scan ip and get informations about this
 
 ## module needed:
