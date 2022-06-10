@@ -124,23 +124,22 @@ region: {str(region)}
 city: {str(city)}
 district: {str(rue)}
 zipcode: {str(zipcode)}
-
 latitude: {str(lat)}
 longitude: {str(lon)}
-
 timezone: {str(timezone)}
 offset: {str(offset)}
 isp: {str(iso)}
 organisation: {str(org)}
-
 reverse: {str(reverse)}
 mobile: {str(mobile)}
 proxy: {str(proxy)}
 hosting: {str(hosting)}
 """
                         print(log)
-                        with open(str(arg1)+'.txt', 'w') as f:
-                            f.write(str(log))
-   time.sleep(5)
+                        file = input ("do you want txt file to save data [y/n]:")
+                        if file == "y" or file == "yes":
+                            with open(str(arg1)+'.txt', 'w') as f:
+                                f.write(str(log))
+                                time.sleep(5)
 while True:
    asyncio.run(ip())
