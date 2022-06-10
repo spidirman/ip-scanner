@@ -16,4 +16,4 @@ leloup_alpha#4534 / spidirman
 
 # social media
   <a href="https://youtube.com/c/leloupalpha">📺YouTube</a>
-  <a href="https://youtube.com/c/leloupalpha">📺YouTube</a>
+
