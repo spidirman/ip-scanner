@@ -6,7 +6,7 @@ import os
 
 os.system("color a")
 async def ip():
-   os.system("cls")
+   os.system("clear || cls")
    arg1 = input ("ip:")
    if arg1 == "":print("invalid ip")
    else:
