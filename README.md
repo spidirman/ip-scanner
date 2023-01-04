@@ -28,7 +28,7 @@ pip install 'module-name'
  <div align="center">
  
 # creator:
-leloup_alpha#4534 / spidirman
+spidirman#4534 / spidirman
 
 # social media
   <a href="https://youtube.com/c/leloupalpha">📺YouTube</a>
