@@ -1,43 +1,71 @@
 import asyncio
 import aiohttp
-import time
 import os
 
-async def ip():
-    os.system("clear || cls")
-    arg1 = input("ip:")
-    if arg1 == "":
-        print("invalid ip")
-        return
-    
-    async with aiohttp.ClientSession() as session:
-        async with session.get(f"http://ip-api.com/json/{arg1}?fields=66846719") as r:
-            js = await r.json()
-    
-    status = js["status"]
-    if status == "fail":
-        message = js["message"]
-        print(message)
-        return
-    
-    continent = js.get("continent", "None")
-    country = js.get("country", "None")
-    region = js.get("regionName", "None")
-    city = js.get("city", "None")
-    rue = js.get("district", "None")
-    zipcode = js.get("zip", "None")
-    lat = js.get("lat", "None")
-    lon = js.get("lon", "None")
-    timezone = js.get("timezone", "None")
-    offset = js.get("offset", "None")
-    iso = js.get("isp", "None")
-    org = js.get("org", "None")
-    reverse = js.get("reverse", "None")
-    mobile = js.get("mobile", "None")
-    proxy = js.get("proxy", "None")
-    hosting = js.get("hosting", "None")
+async def get_ip_info(session, ip_address):
+    url = f"http://ip-api.com/json/{ip_address}?fields=66846719"
+    try:
+        async with session.get(url) as response:
+            if response.status == 200:
+                return await response.json()
+            else:
+                return None
+    except aiohttp.ClientError:
+        return None
 
-                        log = f"continent: {str(continent)}\ncountry: {str(country)}\nregion: {str(region)}\ncity: {str(city)}\ndistrict: {str(rue)}\nzipcode: {str(zipcode)}\nlatitude: {str(lat)}\nlongitude: {str(lon)}\ntimezone: {str(timezone)}\noffset: {str(offset)}\nisp: {str(iso)}\norganisation: {str(org)}\nreverse: {str(reverse)}\nmobile: {str(mobile)}\nproxy: {str(proxy)}\nhosting: {str(hosting)}";print(log);file = input ("do you want txt file to save data [y/n]:")
-                        if file == "y" or file == "yes":
-                            with open(str(arg1)+'.txt', 'w') as f:f.write(str(log));time.sleep(5)
-while True:asyncio.run(ip())
+async def main():
+    os.system("clear || cls")
+    while True:
+        ip_address = input("Enter IP address (or press Enter to exit): ")
+        if not ip_address:
+            print("Exiting...")
+            break
+
+        async with aiohttp.ClientSession() as session:
+            ip_info = await get_ip_info(session, ip_address)
+        
+        if ip_info is None:
+            print("Failed to retrieve information for the given IP address.")
+            continue
+
+        status = ip_info.get("status")
+        if status == "fail":
+            print("Failed to retrieve information. Please check the provided IP address.")
+            continue
+
+        # Extract relevant information
+        ip_data = {
+            "Continent": ip_info.get("continent", "None"),
+            "Country": ip_info.get("country", "None"),
+            "Region": ip_info.get("regionName", "None"),
+            "City": ip_info.get("city", "None"),
+            "District": ip_info.get("district", "None"),
+            "Zip Code": ip_info.get("zip", "None"),
+            "Latitude": ip_info.get("lat", "None"),
+            "Longitude": ip_info.get("lon", "None"),
+            "Timezone": ip_info.get("timezone", "None"),
+            "Offset": ip_info.get("offset", "None"),
+            "ISP": ip_info.get("isp", "None"),
+            "Organization": ip_info.get("org", "None"),
+            "Reverse DNS": ip_info.get("reverse", "None"),
+            "Mobile": ip_info.get("mobile", "None"),
+            "Proxy": ip_info.get("proxy", "None"),
+            "Hosting": ip_info.get("hosting", "None")
+        }
+
+        # Display information to the user
+        print("IP Information:")
+        for key, value in ip_data.items():
+            print(f"{key}: {value}")
+
+        # Ask if the user wants to save the data to a file
+        save_to_file = input("Do you want to save this data to a text file? (y/n): ")
+        if save_to_file.lower() in ("yes", "y"):
+            filename = f"{ip_address}_info.txt"
+            with open(filename, 'w') as file:
+                for key, value in ip_data.items():
+                    file.write(f"{key}: {value}\n")
+            print(f"Data saved to {filename}")
+
+if __name__ == "__main__":
+    asyncio.run(main())
